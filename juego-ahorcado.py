@@ -1,7 +1,12 @@
 import random
 
 def obtener_palabra():
-    palabras = ['python', 'programacion', 'ahorcado', 'juego', 'computadora', 'desarrollador']
+    palabras = [
+        'casa', 'perro', 'gato', 'arbol', 'coche', 'sol', 'luna', 'estrella',
+        'cielo', 'mar', 'montana', 'rio', 'computadora', 'telefono', 'zapato',
+        'camisa', 'pantalon', 'musica', 'libro', 'silla', 'mesa', 'ventana', 
+        'puerta', 'jardin', 'reloj', 'lampara', 'cocina', 'bano', 'plato', 'cuchara'
+    ]
     return random.choice(palabras)
 
 def mostrar_tablero(palabra, intentos):
@@ -20,18 +25,14 @@ def juego_ahorcado():
     intentos_fallidos = 0
     max_intentos = 6
 
-    while True:
+    while intentos_fallidos < max_intentos:
         tablero = mostrar_tablero(palabra_secreta, intentos)
         print(f"Palabra: {tablero}")
-        print(f"Intentos fallidos: {intentos_fallidos}")
+        print(f"Intentos fallidos: {intentos_fallidos} de {max_intentos}")
         print(f"Letras intentadas: {', '.join(intentos)}")
 
         if tablero == palabra_secreta:
             print("¡Felicidades! Has adivinado la palabra.")
-            break
-
-        if intentos_fallidos >= max_intentos:
-            print(f"Has perdido. La palabra era: {palabra_secreta}")
             break
 
         intento = input("Adivina una letra: ").lower()
@@ -43,5 +44,15 @@ def juego_ahorcado():
             intentos.append(intento)
             intentos_fallidos += 1
 
+    if intentos_fallidos == max_intentos:
+        print(f"Has perdido. La palabra era: {palabra_secreta}")
+    
+    if input("Lo siento, has fallado. ¿Quieres intentarlo de nuevo? (s/n): ").lower() == 's':
+        juego_ahorcado()
+    else:
+        print("Gracias por jugar. ¡Hasta la próxima!")
+        input("Presiona cualquier tecla para salir...")
+
 if __name__ == "__main__":
     juego_ahorcado()
+
